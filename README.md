@@ -10,10 +10,10 @@ pip install numpy
 pip install scipy
 ```
 
-For the installation of *lp_solve*, see [Using lpsolve from Python](lpsolve.sourceforge.net/5.5/Python.htm).
-General information on *lp_solve* can be found [here](http://lpsolve.sourceforge.net/5.5/).
+For the installation of *lp_solve*, see [Using lpsolve from Python](https://lpsolve.sourceforge.net/5.5/Python.htm).
+General information on *lp_solve* can be found [here](https://lpsolve.sourceforge.net/5.5/).
 
-The package is intended to be used together with the [ADTool](http://satoss.uni.lu/members/piotr/adtool/).
+The package is intended to be used together with the [ADTool](https://satoss.uni.lu/members/piotr/adtool/).
 
 
 **Installation**
@@ -32,4 +32,4 @@ import adtrees as adt
 T = adt.ADTree('tree.xml')
 ```
 
-For more advanced usage, refer to the walk through examples in [examples folder]().
+For more advanced usage, refer to the walk through examples in [examples folder](../examples).
