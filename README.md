@@ -22,15 +22,19 @@ import adtrees as adt
 
 # initialize attack(-defense) tree from an output file 'tree.xml' produced by the ADTool
 T = adt.ADTree('tree.xml')
+
 # create a basic assignment of cost for the basic actions of the defender in T
 ba = adt.BasicAssignment()
 for b in T.basic_actions('d'):
     ba[b] = 10
+
 # create an instance of the 'maximal coverage' optimization problem
 problem = adt.ADTilp(T, costassignment=ba, budget=100, problem='coverage')
+
 # solve the problem
 problem.solve()
+
 # the optimal set of countermeasures and some additional information is displayed
 ```
 
-For more details, refer to the walk-through examples in [examples folder](../examples).
+For other functionalities and more details, refer to the walk-through examples in [examples folder](../examples).
