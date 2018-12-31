@@ -9,3 +9,5 @@ try:
     from adtrees.linear_programming import ADTilp
 except:
     print(Warning('Failed to import ADTilp.'))
+
+__version__ = '0.0.1'
