@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<adtree>
+	<node refinement="disjunctive">
+		<label>root</label>
+		<node refinement="disjunctive">
+			<label>N_1</label>
+			<node refinement="conjunctive">
+				<label>a</label>
+			</node>
+			<node refinement="conjunctive">
+				<label>b</label>
+			</node>
+			<node refinement="conjunctive">
+				<label>c</label>
+			</node>
+			<node refinement="conjunctive">
+				<label>d</label>
+			</node>
+			<node refinement="disjunctive" switchRole="yes">
+				<label>x</label>
+			</node>
+		</node>
+		<node refinement="conjunctive">
+			<label>e</label>
+			<node refinement="conjunctive" switchRole="yes">
+				<label>z</label>
+			</node>
+		</node>
+	</node>
+</adtree>

@@ -1,0 +1,65 @@
+<?xml version='1.0'?>
+<adtree>
+	<node refinement="conjunctive">
+		<label>root</label>
+		<node refinement="conjunctive">
+			<label>a</label>
+			<parameter domainId="MinCost1" category="basic">15.0</parameter>
+			<node refinement="disjunctive" switchRole="yes">
+				<label>refined3</label>
+				<node refinement="conjunctive">
+					<label>v</label>
+					<node refinement="conjunctive" switchRole="yes">
+						<label>d</label>
+						<parameter domainId="MinCost1" category="basic">16.0</parameter>
+					</node>
+				</node>
+				<node refinement="conjunctive">
+					<label>w</label>
+					<node refinement="conjunctive" switchRole="yes">
+						<label>e</label>
+						<parameter domainId="MinCost1" category="basic">9.0</parameter>
+					</node>
+				</node>
+			</node>
+		</node>
+		<node refinement="disjunctive">
+			<label>refined1</label>
+			<node refinement="conjunctive">
+				<label>b</label>
+				<parameter domainId="MinCost1" category="basic">10.0</parameter>
+			</node>
+			<node refinement="conjunctive">
+				<label>c</label>
+				<parameter domainId="MinCost1" category="basic">5.0</parameter>
+				<node refinement="conjunctive" switchRole="yes">
+					<label>x</label>
+				</node>
+			</node>
+		</node>
+		<node refinement="conjunctive" switchRole="yes">
+			<label>refined2</label>
+			<node refinement="conjunctive">
+				<label>x</label>
+			</node>
+			<node refinement="conjunctive">
+				<label>y</label>
+				<node refinement="conjunctive" switchRole="yes">
+					<label>b</label>
+					<parameter domainId="MinCost1" category="basic">10.0</parameter>
+				</node>
+			</node>
+			<node refinement="conjunctive">
+				<label>z</label>
+				<node refinement="conjunctive" switchRole="yes">
+					<label>d</label>
+					<parameter domainId="MinCost1" category="basic">16.0</parameter>
+				</node>
+			</node>
+		</node>
+	</node>
+	<domain id="MinCost1">
+		<class>lu.uni.adtool.domains.adtpredefined.MinCost</class>
+		<tool>ADTool2</tool>
+	</domain>
+</adtree>

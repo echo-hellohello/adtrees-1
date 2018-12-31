@@ -1,0 +1,54 @@
+<?xml version='1.0'?>
+<adtree>
+	<node refinement="conjunctive">
+		<label>root</label>
+		<node refinement="conjunctive">
+			<label>a</label>
+			<node refinement="disjunctive" switchRole="yes">
+				<label>refined3</label>
+				<node refinement="conjunctive">
+					<label>v</label>
+					<node refinement="conjunctive" switchRole="yes">
+						<label>d</label>
+					</node>
+				</node>
+				<node refinement="conjunctive">
+					<label>w</label>
+					<node refinement="conjunctive" switchRole="yes">
+						<label>e</label>
+					</node>
+				</node>
+			</node>
+		</node>
+		<node refinement="disjunctive">
+			<label>refined1</label>
+			<node refinement="conjunctive">
+				<label>b</label>
+			</node>
+			<node refinement="conjunctive">
+				<label>c</label>
+				<node refinement="conjunctive" switchRole="yes">
+					<label>x</label>
+				</node>
+			</node>
+		</node>
+		<node refinement="conjunctive" switchRole="yes">
+			<label>refined2</label>
+			<node refinement="conjunctive">
+				<label>x</label>
+			</node>
+			<node refinement="conjunctive">
+				<label>y</label>
+				<node refinement="conjunctive" switchRole="yes">
+					<label>b</label>
+				</node>
+			</node>
+			<node refinement="conjunctive">
+				<label>z</label>
+				<node refinement="conjunctive" switchRole="yes">
+					<label>d</label>
+				</node>
+			</node>
+		</node>
+	</node>
+</adtree>

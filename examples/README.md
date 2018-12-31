@@ -1,0 +1,28 @@
+What the functions do (see comments in the code for more detailed explanation):
+
+- ex_handmade
+  - creation of an ADTree when not using ADTool
+  - creation of an output .xml file accepted by ADTool
+- ex_basic
+  - initializing ADTree from an .xml file produced by ADTool
+  - accessing the root node
+  - checking whether a node is countered and accessing the countermeasure
+  - displaying sets of basic actions of the actors
+  - checking whether there are repeated basic actions in the tree
+- ex_semantics
+  - computing set semantics
+  - computing defense semantics (in trees with no repeated basic actions, for now)
+- ex_cost
+  - different ways of defining basic assignments
+  - outputting basic assignment to a file
+  - defining attribute domains
+  - using predefined attribute domains
+  - computing the value of an attribute:
+    - using the bottom-up evaluation
+    - using the evaluation on set semantics
+    - using the repeated bottom-up procedure
+- ex_pareto
+  - defining Pareto attribute domains
+  - defining basic assignment for Pareto attribute domains
+- ex_optimization
+  - defining optimization problems for ADTrees
