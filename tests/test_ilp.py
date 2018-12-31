@@ -10,7 +10,8 @@ except:
 
 def test_coverage():
     if flag:
-        T = get_tree(15)
+        n = 15
+        T = get_tree(n)
         ba = BasicAssignment()
         for b in T.basic_actions('d'):
             ba[b] = 10
@@ -30,7 +31,8 @@ def test_coverage():
 
 def test_investment():
     if flag:
-        T = get_tree(15)
+        n = 15
+        T = get_tree(n)
         ba = BasicAssignment()
         for b in T.basic_actions('d'):
             ba[b] = 10

@@ -10,9 +10,9 @@ def test_initialize_node():
 def test_initialize_node_failed_actor():
     n = ADNode(actor='x')
     try:
-        m = n
+        m = str(n)
         flag = False
-    except NameError:
+    except AttributeError:
         flag = True
     assert flag == True
 
@@ -20,9 +20,9 @@ def test_initialize_node_failed_actor():
 def test_initialize_node_failed_refinement():
     n = ADNode(actor='d', refinement='XOR')
     try:
-        m = n
+        m = str(n)
         flag = False
-    except NameError:
+    except AttributeError:
         flag = True
     assert flag == True
 
