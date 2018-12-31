@@ -38,21 +38,22 @@ with open("README.md", "r") as fh:
 
 setup(
     name="adtrees",
-    version="0.0.1",
+    version=adtrees.__version__,
     author="Wojciech Widel",
     author_email="wwidel@irisa.fr",
     description="Implementation of attack(-defense) trees.",
     long_description=long_description,
-    long_description_content_type="markdown",
+    long_description_content_type="text/markdown",
     url="https://github.com/wwidel/adtrees/",
+    install_requires=['numpy==1.11.1', 'scipy==0.18.1'],
     tests_require=['pytest'],
     cmdclass={'test': PyTest},
     test_suite='adtrees.test.test_adtrees',
     include_package_data=True,
     packages=find_packages(),
     classifiers=[
-        "Programming Language :: Python :: 3.5.5",
-        "License :: OSI Approved :: GNU GPLv3",
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
     extras_require={
