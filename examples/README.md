@@ -1,4 +1,4 @@
-What the functions do (see comments in the code for more detailed explanation):
+What the functions do (see the comments in *examples.py* for more detailed explanation):
 
 - ex_handmade
   - creation of an ADTree when not using ADTool
