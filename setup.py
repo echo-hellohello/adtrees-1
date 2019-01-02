@@ -45,7 +45,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/wwidel/adtrees/",
-    install_requires=['numpy==1.11.1', 'scipy==0.18.1'],
+    install_requires=['numpy==1.15.2', 'scipy==1.1.0'],
     tests_require=['pytest'],
     cmdclass={'test': PyTest},
     test_suite='adtrees.test.test_adtrees',
