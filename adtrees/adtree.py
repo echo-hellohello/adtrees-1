@@ -3,7 +3,9 @@ from adtrees.adnode import ADNode
 from adtrees.default_domains import setSem, minSkillLvl
 from adtrees.default_domains import attStrat
 from adtrees.default_domains import countStrats
+from adtrees.default_domains import suffWit
 from adtrees.basic_assignment import BasicAssignment
+from adtrees.utils import minimal_lists
 
 
 class ADTree:
@@ -206,11 +208,18 @@ class ADTree:
         return None
 
     def contains_clones(self):
+        if self.root.type == 'a':
+            # attacker is the proponent
+            a_role = 'p'
+            d_role = 'o'
+        else:
+            a_role = 'o'
+            d_role = 'p'
         for b in self.basic_actions('a'):
-            if self.isclone(b, 'a'):
+            if self.isclone(b, a_role):
                 return True
         for b in self.basic_actions('d'):
-            if self.isclone(b, 'd'):
+            if self.isclone(b, d_role):
                 return True
         return False
 
@@ -284,41 +293,32 @@ class ADTree:
             node = self.root
         countered = self.countered(node)
         countermeasure = self.counter(node)
-        if node.isbasic():
-            # the node represents a basic action; has at most one child,
-            # which is a countermeasure
-            if not countered:
-                prefix = '\t<node refinement="conjunctive">\n' + \
-                    '\t\t<label>' + node.label + '</label>\n\t'
-            else:
-                prefix = '\t<node refinement="conjunctive" switchRole="yes">\n' + \
-                    '\t\t<label>' + node.label + '</label>\n\t'
-            if not countered:
-                # the node is a leaf of the tree
-                return prefix + '</node>\n'
-            else:
-                return prefix + '\t' + self.__xml__(countermeasure, 1) + '</node>\n'
+
+        if node.ref == 'AND':
+            ref = '"conjunctive"'
         else:
-            # else the node is refined and has children of the same type.
-            if node.ref == 'AND':
-                ref = '"conjunctive"'
-            else:
-                ref = '"disjunctive"'
-            if not countered:
-                prefix = '\t<node refinement=' + ref + '>\n' + \
-                    '\t\t<label>' + node.label + '</label>\n\t'
-            else:
-                prefix = '\t<node refinement=' + ref + ' switchRole="yes">\n' + \
-                    '\t\t<label>' + node.label + '</label>\n\t'
-            # take care of children
-            result = prefix
-            for child in self.dict[node]:
-                if child != countermeasure:
-                    result += self.__xml__(child)
-            if countered:
-                result += self.__xml__(countermeasure, 1)
-            result += '</node>'
-            return result
+            # in ADTool 2.2.2, default refinement for basic actions is
+            # "disjunctive"
+            ref = '"disjunctive"'
+
+        if not counter:
+            # if the node is not a countermeasure itself, no switching of
+            # actors
+            prefix = '\t<node refinement=' + ref + '>\n' + \
+                '\t\t<label>' + node.label + '</label>\n\t'
+        else:
+            # if the node itself is a countermeasure, switch actors
+            prefix = '\t<node refinement=' + ref + ' switchRole="yes">\n' + \
+                '\t\t<label>' + node.label + '</label>\n\t'
+
+        result = prefix
+        for child in self.dict[node]:
+            if child != countermeasure:
+                result += self.__xml__(child)
+        if countered:
+            result += self.__xml__(countermeasure, 1)
+        result += '</node>\n'
+        return result
 
     def output(self, name=''):
         """
@@ -363,23 +363,46 @@ class ADTree:
         Returns a list of two-element lists
             [[set, set], [set, set], ..., [set, set]],
         with each element of each of the lists being a set of basic actions.
-
-        Intended only for ADTrees with no repeated basic actions.
         """
-        if self.contains_clones():
-            print(
-                "There are repeated basic actions in the tree. Can't compute the defense semantics.")
-            return []
         attackers_actions = self.basic_actions('a')
         defenders_actions = self.basic_actions('d')
-        # step 1: attack strategies
-        ba = BasicAssignment()
-        for b in attackers_actions:
-            ba[b] = [[b]]
-        for b in defenders_actions:
-            ba[b] = [[]]
-        AS = attStrat.evaluateBU(self, ba)
+        # step 1: create attack strategies
+        if self.contains_clones():
+            # variant 1: for trees containing repeated basic actions
+            # substep 1: create witnesses
+            ba = BasicAssignment()
+            for b in attackers_actions:
+                ba[b] = []
+            for b in defenders_actions:
+                ba[b] = [[b]]
+            witnesses = suffWit.evaluateBU(self, ba)
+            # substep 2: iterate over witnesses, get attack strategies
+            # countering them
+            AS = []
+            for witness in witnesses:
+                ba = BasicAssignment()
+                for b in attackers_actions:
+                    ba[b] = [[b]]
+                for b in defenders_actions:
+                    if b in witness:
+                        ba[b] = []
+                    else:
+                        ba[b] = [[]]
+                candidates = countStrats.evaluateBU(self, ba)
+                # select the minimal ones
+                for AS_countering_witness in minimal_lists(candidates):
+                    if AS_countering_witness not in AS:
+                        AS.append(AS_countering_witness)
+        else:
+            # variant 2: for trees containing no repeated basic actions (iFM)
+            ba = BasicAssignment()
+            for b in attackers_actions:
+                ba[b] = [[b]]
+            for b in defenders_actions:
+                ba[b] = [[]]
+            AS = attStrat.evaluateBU(self, ba)
 
+        # At this point AS is the set of all attack strategies in the tree.
         # step 2: defense strategies countering attack strategies
         result = []
         # 2.1 swap actors
@@ -397,23 +420,9 @@ class ADTree:
                     ba[b] = [[]]
             # do the bottom-up
             candidates = countStrats.evaluateBU(self, ba, proponent)
-
-            total = len(candidates)
             # select the minimal ones
-            if total == 1:
-                result.append([set(A), set(candidates[0])])
-            else:
-                for i in range(total):
-                    candidate = candidates[i]
-                    minimal = True
-                    for j in range(total):
-                        if candidate == candidates[j]:
-                            pass
-                        elif set(candidate).intersection(candidates[j]) == set(candidates[j]):
-                            minimal = False
-                            break
-                    if minimal:
-                        result.append([set(A), set(candidate)])
+            for candidate in minimal_lists(candidates):
+                result.append([set(A), set(candidate)])
         return result
 
     def __repr__(self):

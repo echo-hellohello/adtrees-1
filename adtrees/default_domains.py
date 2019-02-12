@@ -1,5 +1,6 @@
 from adtrees.attribute_domain import AttrDomain
 from adtrees.utils import combine_bundles, listunion, otimes, odot
+from adtrees.utils import oplus, oplushat
 
 minCost = AttrDomain(min, lambda x, y: x + y)
 
@@ -16,8 +17,11 @@ setSem = AttrDomain(listunion, combine_bundles)
 
 # <-- for defense semantics
 # attack strategies in trees with no repeated basic actions
-attStrat = AttrDomain(listunion, otimes, lambda A, B: listunion(
-    listunion(A, B), otimes(A, B)), listunion, otimes, listunion)
+attStrat = AttrDomain(listunion, otimes, oplushat,
+                      listunion, otimes, listunion)
+
+# witnesses for trees with repeated basic actions
+suffWit = AttrDomain(oplushat, oplushat, oplushat, otimes, oplushat, oplus)
 
 countStrats = AttrDomain(listunion, otimes, otimes, listunion, otimes, odot)
 # -->

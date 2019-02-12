@@ -149,8 +149,8 @@ class AttrDomain:
             if label not in ba:
                 print('Cannot perform the attribute evaluation: the action "' +
                       label + '" has no value assigned.')
-        if not T.contains_clones():
-            return self.evaluateBU(T, ba)
+        # if not T.contains_clones():
+        #    return self.evaluateBU(T, ba)
         proponent = T.root.type
         result = None
         necClones, optClones = T.clonesPartitioned()
@@ -174,7 +174,7 @@ class AttrDomain:
             itresult = self.evaluateBU(T, temp_ba, proponent)
             # modify
             for label in optminusC:
-                itresult = self.andp(result, ba[label])
+                itresult = self.andp(itresult, ba[label])
             # modify
             if result == None:
                 result = itresult

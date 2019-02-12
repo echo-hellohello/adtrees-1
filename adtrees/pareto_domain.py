@@ -76,7 +76,7 @@ def paretoFrontierNaive(A):
     """
     try to optimize
     have a look at http://oco-carbon.com/metrics/find-pareto-frontiers-in-python/
-    also plotting!
+    also plotting
     """
     result = []
     for a in A:

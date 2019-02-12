@@ -141,7 +141,8 @@ class BasicAssignment:
             name += '.txt'
         with open(name, 'w') as f:
             for label in self:
-                f.write(str(label) + '\t' + str(self[label]) + '\n')
+                out_label = str(label).replace('\n', ' ')
+                f.write(out_label + '\t' + str(self[label]) + '\n')
         return
 
     def __eq__(self, other):

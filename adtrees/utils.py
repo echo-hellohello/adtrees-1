@@ -62,3 +62,37 @@ def odot(A, B):
         return [[]]
     else:
         return listunion(A, B)
+
+
+def oplus(A, B):
+    return listunion(A, otimes(A, B))
+
+
+def oplushat(A, B):
+    return listunion(listunion(A, B), otimes(A, B))
+
+
+def minimal_lists(L):
+    '''
+    Given list L of lists
+        L = [L1, L2, L3, ..., Ln],
+    return the minimal (inclusion-wise) lists from L.
+
+    This is a generator.
+    '''
+    total = len(L)
+    # select the minimal ones
+    if total == 1:
+        yield L[0]
+    else:
+        for i in range(total):
+            candidate = L[i]
+            minimal = True
+            for j in range(total):
+                if candidate == L[j]:
+                    pass
+                elif set(candidate).intersection(L[j]) == set(L[j]):
+                    minimal = False
+                    break
+            if minimal:
+                yield candidate
