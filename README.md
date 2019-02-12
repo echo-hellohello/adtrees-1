@@ -37,4 +37,4 @@ problem.solve()
 # the optimal set of countermeasures and some additional information is displayed
 ```
 
-For other functionalities and more details, refer to the walk-through examples in [examples folder](./examples).
+For other functionalities and more details, refer to the walk-through examples in [examples folder](../examples).
