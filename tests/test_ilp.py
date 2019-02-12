@@ -1,5 +1,5 @@
-from gettree import get_tree
-from gettree import extremal_tree
+from tree_factory import get_tree
+from tree_factory import attack_defense_tree_structured
 from adtrees import BasicAssignment
 try:
     from adtrees import ADTilp

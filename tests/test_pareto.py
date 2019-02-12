@@ -1,9 +1,9 @@
 from adtrees import BasicAssignment
 from adtrees import ParetoDomain
-from gettree import extremal_tree
+from tree_factory import attack_defense_tree_structured
 
 m = 6
-T = extremal_tree(m)
+T = attack_defense_tree_structured(m // 2)
 
 
 def test_extremal_tree():

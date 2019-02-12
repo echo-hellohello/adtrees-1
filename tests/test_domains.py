@@ -1,6 +1,6 @@
 from adtrees import BasicAssignment
 from adtrees import AttrDomain
-from gettree import get_tree
+from tree_factory import get_tree
 
 n = 15
 T = get_tree(n)

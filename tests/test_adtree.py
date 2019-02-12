@@ -1,13 +1,13 @@
-from gettree import get_tree
-from gettree import extremal_tree
+from tree_factory import get_tree
+from tree_factory import attack_defense_tree_structured
 
 n = 15
 m = 6
 T = get_tree(n)
-T2 = extremal_tree(m)
+T2 = attack_defense_tree_structured(m)
 
 
-def test_contains_clones():
+def test_contains_clones_no_clones():
     assert T.contains_clones() == False
 
 
@@ -92,13 +92,13 @@ def test_def_semantics():
 
 def test_extremal_tree_set_semantics():
     set_sem = T2.set_semantics()
-    expected_set_sem_size = 2**m
+    expected_set_sem_size = 2**(2 * m)
     actual_set_sem_size = len(set_sem)
     assert expected_set_sem_size == actual_set_sem_size
 
 
 def test_extremal_tree_def_semantics():
     def_sem = T2.defense_semantics()
-    expected_def_sem_size = m * 2**(m - 2)
+    expected_def_sem_size = (2 * m) * 2**(2 * m - 2)
     actual_def_sem_size = len(def_sem)
     assert expected_def_sem_size == actual_def_sem_size
