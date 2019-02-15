@@ -44,3 +44,9 @@ problem.solve()
 ```
 
 For other functionalities and more details, refer to the walk-through examples in [examples folder](./examples).
+
+[license shield]: https://img.shields.io/badge/license-MIT-blue.svg?maxAge=3600
+
+[pypi package version]: https://img.shields.io/pypi/v/adtrees.svg
+
+[python supported shield]: https://img.shields.io/pypi/pyversions/adtrees.svg
