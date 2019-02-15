@@ -45,7 +45,7 @@ problem.solve()
 
 For other functionalities and more details, refer to the walk-through examples in [examples folder](./examples).
 
-[license shield]: https://img.shields.io/github/license/wwidel/adtrees.svg?style=flat
+[license shield]: https://img.shields.io/github/license/wwidel/adtrees.svg?style=flat?color=green
 
 [pypi package version]: https://img.shields.io/pypi/v/adtrees.svg
 
