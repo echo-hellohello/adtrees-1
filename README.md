@@ -1,4 +1,10 @@
-`adtrees` implements some methods for qualitative and quantitative evaluation of security using [attack trees](https://en.wikipedia.org/wiki/Attack_tree)
+# adtrees Python package
+
+[![license shield][]](./LICENSE)
+[![pypi package version][]](https://pypi.python.org/pypi/adtrees)
+[![python supported shield][]](https://pypi.python.org/pypi/adtrees)
+
+`adtrees` is a package facilitating usage of some methods for qualitative and quantitative evaluation of security using [attack trees](https://en.wikipedia.org/wiki/Attack_tree)
 and [attack-defense trees](http://people.irisa.fr/Barbara.Kordy/papers/ADT12.pdf).
 
 The package is intended to be used together with the [ADTool](https://satoss.uni.lu/members/piotr/adtool/), but this is not obligatory.
