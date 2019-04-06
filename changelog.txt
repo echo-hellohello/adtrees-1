@@ -1,0 +1,19 @@
+version 0.0.5
+new content:
+	ADNode.copy - creates new ADNode with the same parameters as the original one
+	ADTree.root_always_achievable - checks whether it is always (i.e., under any behaviour of the defender) possible for the attacker to achieve the root goal
+	default_domains.maxProb - domain for computing maximal probability of success over minimal attacks
+	default_domains.satisfiability - domain for verifying whether under given behaviour of the actors the root goal is achieved
+	optimizers.py - adds two functions: optimal_attacks, and optimal_countermeasures
+	ParetoDomain - extended to accommodate the maxProb attribute domain
+	BasicAssignment - when creating from a .txt file, ignore lines starting with '#' (i.e., comments can be added to those files)
+fixes:
+	BasicAssignment - int -> float
+
+version 0.0.4
+new content:
+	ADTree.defense_semantics can now be applied to ADTrees containing repeated basic actions
+bugs fixed:
+	ADTree.output
+	ADTree.contains_clones
+	AttrDomain.evaluateRBU
