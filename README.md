@@ -45,6 +45,20 @@ problem.solve()
 
 For other functionalities and more details, refer to the walk-through examples in [examples folder](./examples).
 
+**Easy usage: GUI is here!**
+
+If you want to only analyze your attack or attack-defense tree using methods offered by the package, you can do it conveniently via a GUI. Simply type
+
+```python
+from adtrees import osead
+
+osead()
+```
+
+*OSEAD* stands for "Optimal Strategies Extractor for Attack-Defense trees". To use it under Windows, you don't even need the package: just download the *OSEAD* tool from [here](https://people.irisa.fr/Wojciech.Widel/suftware/osead.zip.).
+
+
+
 [license shield]: https://img.shields.io/github/license/wwidel/adtrees.svg?style=flat?color=green
 
 [pypi package version]: https://img.shields.io/pypi/v/adtrees.svg
