@@ -4,6 +4,7 @@ from adtrees.default_domains import setSem, minSkillLvl
 from adtrees.default_domains import attStrat
 from adtrees.default_domains import countStrats
 from adtrees.default_domains import suffWit
+from adtrees.default_domains import satisfiability
 from adtrees.basic_assignment import BasicAssignment
 from adtrees.utils import minimal_lists
 
@@ -110,6 +111,8 @@ class ADTree:
         # store the set of all nodes holding basic actions of the tree.
         self.basics = set(
             [node for node in self.dict.keys() if node.isbasic()])
+        # DAGIFY
+        # self.dagify()
 
     def adterm(self, node=None):
         """
@@ -197,6 +200,48 @@ class ADTree:
             if child.type != ntype:
                 return child
         return None
+
+    # def dagify(self):
+    #     """
+    #     Turn tree into a DAG.
+    #
+    #     For now: it is assumed that the underlying tree is "well-formed", i.e.,
+    #     that the result of dagification is indeed acyclic.
+    #     """
+    #     # no need if each of the labels appears once
+    #     count = []
+    #     repeated_labels = False
+    #     for node in self.dict:
+    #         if node.label not in count:
+    #             count.append(node.label)
+    #         else:
+    #             # this label has been seen before
+    #             repeated_labels = True
+    #             break
+    #     if not repeated_labels:
+    #         return
+    #     #
+    #     new_nodes = {}
+    #     new_dict = {}
+    #     # iterate over nodes
+    #     for node in self.dict:
+    #         label = node.label
+    #         # if no new node bearing the label exists, create it
+    #         if label not in new_nodes:
+    #             new_nodes[label] = node.copy()
+    #         new_node = new_nodes[label]
+    #         # add the node bearing the label to the new dictionary, if it is not in
+    #         # there yet
+    #         if new_node not in new_dict:
+    #             new_dict[new_node] = []
+    #         # add children
+    #         for child in self.dict[node]:
+    #             child_label = child.label
+    #             if child_label not in new_nodes:
+    #                 new_nodes[child_label] = child.copy()
+    #             if new_nodes[child_label] not in new_dict[new_node]:
+    #                 new_dict[new_node].append(new_nodes[child_label])
+    #     self.dict = new_dict
 
     def parent(self, node):
         """
@@ -424,6 +469,12 @@ class ADTree:
             for candidate in minimal_lists(candidates):
                 result.append([set(A), set(candidate)])
         return result
+
+    def root_always_achievable(self):
+        ba = BasicAssignment()
+        for b in self.basic_actions():
+            ba[b] = 1
+        return satisfiability.evaluateBU(self, ba) == 1
 
     def __repr__(self):
         return self.adterm

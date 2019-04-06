@@ -60,14 +60,18 @@ class BasicAssignment:
         ...
         labelk\tvaluek
 
-        Note that between 'labeli' and 'valuei' there is an indent
+        Note that between 'labeli' and 'valuei' there is an indent.
 
         Such a file can be created using self.output(filename).
+
+        Lines beginning with '#' are ignored (comment lines).
         """
         result = {}
         try:
             with open(path, 'rt') as f:
                 line = f.readline()  # = 'label\tvalue\n'
+                while line != '' and line[0] == '#':
+                    line = f.readline()
                 # the behaviour depends on whether the 'value' is a list (for Pareto domain)
                 # or not
                 if '[' in line:
@@ -77,19 +81,23 @@ class BasicAssignment:
                         line_content = line.strip().split('\t')
                         label = line_content[0]
                         values = line_content[1][2:-2].split(', ')
-                        value = [[int(i) for i in values]]
+                        value = [[float(i) for i in values]]
                         result[label] = value
                         # done, move to the next line.
                         line = f.readline()
+                        while line != '' and line[0] == '#':
+                            line = f.readline()
                 else:
                     # the lines are of the form 'label\tvalue\n'
                     while line != '':
                         line_content = line.strip().split('\t')
                         label = line_content[0]
-                        value = int(line_content[1])
+                        value = float(line_content[1])
                         result[label] = value
                         # done, move to the next line.
                         line = f.readline()
+                        while line != '' and line[0] == '#':
+                            line = f.readline()
         except FileNotFoundError:
             print(
                 "Couldn't load basic assignment from {}\n There is no such file or directory.".format(path))

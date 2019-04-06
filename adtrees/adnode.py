@@ -35,7 +35,7 @@ class ADNode:
         # check whether the parameters provided are OK.
         # actor
         if actor not in ['a', 'd']:
-            print('Invalid actor.')
+            print('Invalid actor: {}'.format(actor))
             help(ADNode)
             return
         self.type = actor
@@ -53,9 +53,15 @@ class ADNode:
         elif refinement == None:
             self.ref = ''
         else:
-            print('Invalid refinement.')
+            print('Invalid refinement: {}'.format(refinement))
             help(ADNode)
             return
+
+    def copy(self):
+        """
+        Return a copy of the node.
+        """
+        return ADNode(self.type, self.label, self.ref)
 
     def isbasic(self):
         """

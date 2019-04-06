@@ -197,11 +197,11 @@ class ADTilp():
         # print(self.matrix.toarray())
         # print(self.rhs)
 
-    def solve(self):
+    def solve(self, verbose=True):
         """
         Solve the problem represented by 'self', using lp_solve.
 
-        Display results.
+        If verbose==True, then display the results.
         """
         M = self.matrix.toarray()
         defenders_actions = self.T.basic_actions('d')
@@ -212,19 +212,28 @@ class ADTilp():
         defs_to_deploy = [defenders_actions[i]
                           for i in range(self.p) if res[1][i] > 0]
 
-        print('With your budget of {}, you should deploy the following defences:'.format(
-            self.budget))
-        for i in range(self.p):
-            if res[1][i] > 0:
-                print(defenders_actions[i])
+        if verbose:
+            print('With your budget of {}, you should deploy the following defences:'.format(
+                self.budget))
+            for ba in defs_to_deploy:
+                print(ba)
+        # for i in range(self.p):
+        #    if res[1][i] > 0:
+        #        print(defenders_actions[i])
+
+        number_of_prevented = int(
+            self.n - np.sum(res[1][self.p: self.p + self.n]))
+        number_of_preventable = int(self.n)
 
         if self.type == 'coverage':
             number_of_unprevented = -int(res[0])
-            print('Then {} attacks from total of {} preventable attacks are prevented.\n'.format(
-                int(self.n - np.sum(res[1][self.p: self.p + self.n])), self.n))
-            return (number_of_unprevented, defs_to_deploy)
+            if verbose:
+                print('Then {} attacks from total of {} preventable attacks are prevented.\n'.format(
+                    number_of_prevented, number_of_preventable))
+            return (defs_to_deploy, number_of_prevented, number_of_preventable)
         else:
-            min_invest = int(res[0])
-            print('Then {} attacks from total of {} preventable attacks are prevented and the minimal necessary investment of the attacker is {}.\n'.format(
-                int(self.n - np.sum(res[1][self.p: self.p + self.n])), self.n, min_invest))
-            return (min_invest, defs_to_deploy)
+            min_invest = float(res[0])
+            if verbose:
+                print('Then {} attacks from total of {} preventable attacks are prevented and the minimal necessary investment of the attacker is {}.\n'.format(
+                    number_of_prevented, number_of_preventable, min_invest))
+            return (defs_to_deploy, number_of_prevented, number_of_preventable, min_invest)

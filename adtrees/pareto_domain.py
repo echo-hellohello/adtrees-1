@@ -11,14 +11,16 @@ class ParetoDomain(AttrDomain):
     class ParetoDomain(self, minplus, minmax)
 
     Creates Pareto attribute domain induced by
-    'minplus' domains of type (min, +, +, min, +, min)
-    and
+    'minplus' domains of type (min, +, +, min, +, min),
     'minmax' domains of type (min, max, max, min, max, min)
+    and
+    'prob' domains of type (max, *, *, max, *, max)
 
     Parameters
     ----------
     minplus : non-negative integer, default 0
     minmax : non-negative integer, default 0
+    prob : non-negative integer, default 0
 
     Examples
     ----------
@@ -38,42 +40,55 @@ class ParetoDomain(AttrDomain):
     [[15, 1, 0], [13, 0, 1]]
     """
 
-    def __init__(self, minplus=0, minmax=0):
+    def __init__(self, minplus=0, minmax=0, prob=0):
         super(ParetoDomain, self).__init__(
-            addSets, mulSetsCreator(m=minplus, n=minmax))
+            addSetsCreator(m=minplus, n=minmax), mulSetsCreator(m=minplus, n=minmax, k=prob))
+        self.pareto = 1
 
 
-def mulPoints(a, b, m, n):
+def mulPoints(a, b, m, n, k):
     """
-    cost, cost, ... cost, skill, skill, ...., skill
-    m ~cost domains, n ~skill domains
+    cost, cost, ... cost, skill, skill, ...., skill, prob, ..., prob
+    m ~cost domains, n ~skill domains, k ~skill domains
 
     >>> a = [x, y, z]
     >>> b = [x', y', z']
     >>> m = 1
     >>> n = 2
-    >>> mulPoints(a, b, m, n)
+    >>> k = 0
+    >>> mulPoints(a, b, m, n, k)
     [x + x', max(y, y'), max(z, z')]
     """
     result = [a[i] + b[i] for i in range(m)]
     for i in range(m, m + n):
         result.append(max(a[i], b[i]))
+    for i in range(m + n, m + n + k):
+        result.append(a[i] * b[i])
     return result
 
 
-def dominatedBy(a, b):
+def dominatedBy(a, b, j):
     """
     true iff point a is dominated by point b
+
+    for the first j coordinates, smaller is better
+    for the remaining coordinates, bigger is better
     """
     #assert len(a) == len(b)
-    for i in range(len(a)):
+    for i in range(j):
         if b[i] > a[i]:
+            return False
+    for i in range(j, len(a)):
+        if b[i] < a[i]:
             return False
     return True
 
 
-def paretoFrontierNaive(A):
+def paretoFrontierNaive(A, j):
     """
+    for the first j coordinates, smaller is better
+    for the remaining coordinates, bigger is better
+
     try to optimize
     have a look at http://oco-carbon.com/metrics/find-pareto-frontiers-in-python/
     also plotting
@@ -82,7 +97,7 @@ def paretoFrontierNaive(A):
     for a in A:
         isParetoPoint = True
         for b in A:
-            if b != a and dominatedBy(a, b):
+            if b != a and dominatedBy(a, b, j):
                 isParetoPoint = False
                 break
 
@@ -91,11 +106,17 @@ def paretoFrontierNaive(A):
     return result
 
 
-def mulSetsCreator(m, n):
+def mulSetsCreator(m, n, k):
     def mulSets(A, B):
-        return paretoFrontierNaive([mulPoints(a, b, m, n) for a in A for b in B])
+        return paretoFrontierNaive([mulPoints(a, b, m, n, k) for a in A for b in B], j=m + n)
     return mulSets
 
 
-def addSets(A, B):
-    return paretoFrontierNaive(listunion(A, B))
+def addSetsCreator(m, n):
+    """
+    for the first j coordinates, smaller is better
+    for the remaining coordinates, bigger is better
+    """
+    def addSets(A, B):
+        return paretoFrontierNaive(listunion(A, B), j=m + n)
+    return addSets

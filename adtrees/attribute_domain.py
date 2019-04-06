@@ -16,6 +16,8 @@ class AttrDomain:
     andp, oro, ando, cp, co : binary functions defined for the same type of arguments, default None.
              Operations to be performed at ORo, ANDo, Cp, Cp nodes, respectively.
 
+    pareto : 1 if the domain is a Pareto domain, 0 otherwise
+
     If only orp and andp provided, it is assummed that the domain satisfies
     orp = ando = co,
     andp = oro = cp.
@@ -52,6 +54,7 @@ class AttrDomain:
             self.co = co
             # general domain
             self.type = -1
+        self.pareto = 0
 
     def evaluateBU(self, T, ba, proponent=None):
         """

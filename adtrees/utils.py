@@ -96,3 +96,47 @@ def minimal_lists(L):
                     break
             if minimal:
                 yield candidate
+
+# GUI stuff follows
+
+
+def read_val_from_grid(frame, row, column):
+    '''
+    An adaptation of https://stackoverflow.com/a/31034127
+
+    Edit: If you wanted to get the values from the grid, you have to use the grid's children.
+
+    Where you can call the function and it will return the child. To get the value of the entry, you can use:
+        find_in_grid(root, i+1, j).get()
+    '''
+    for child in frame.children.values():
+        info = child.grid_info()
+        #
+        try:
+            x = (info['row'] == row) and (info['column'] == column)
+            if x:
+                return float(child.get())
+        except KeyError:
+            pass
+    return None
+
+
+def get_widget_from_grid(frame, row, column):
+    '''
+    An adaptation of https://stackoverflow.com/a/31034127
+
+    Edit: If you wanted to get the values from the grid, you have to use the grid's children.
+
+    Where you can call the function and it will return the child. To get the value of the entry, you can use:
+        find_in_grid(root, i+1, j).get()
+    '''
+    for child in frame.children.values():
+        info = child.grid_info()
+        #
+        try:
+            x = (info['row'] == row) and (info['column'] == column)
+            if x:
+                return child
+        except KeyError:
+            pass
+    return None

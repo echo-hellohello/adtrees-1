@@ -49,7 +49,7 @@ def getADNode(ETnode, pt):
     types = ['a', 'd']
     # todo: initial checks
     # the first child is the label, i.e., ETnode[0].tag = 'label'
-    label = ETnode[0].text
+    label = ETnode[0].text.replace('\n', ' ')
     # the first three children are either
     # label parameter
     # or
@@ -92,11 +92,11 @@ def getAssignment(path):
     while ETnodesLeft != []:
         currentET = ETnodesLeft[0]
         if len(currentET.getchildren()) > 1 and currentET[1].tag == 'parameter':
-            label = str(currentET[0].text)
+            label = str(currentET[0].text).replace('\n', ' ')
             if label not in result:
                 val = currentET[1].text
                 # val most probably looks like '10.0'
-                result[label] = int(val.split('.')[0])
+                result[label] = float(val)  # int(val.split('.')[0])
         for child in currentET:
             if child.tag == 'node':
                 ETnodesLeft.append(child)
