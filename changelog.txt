@@ -14,9 +14,9 @@ new content:
 fixes:
 	BasicAssignment - int -> float
 
--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 -=-=- version 0.0.4 -=-=-
+February 12, 2019
 
 new content:
 	ADTree.defense_semantics can now be applied to ADTrees containing repeated basic actions
