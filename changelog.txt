@@ -1,5 +1,6 @@
 version 0.0.5
 new content:
+	GUI!!! - from adtrees import osead, then run osead() to see it!
 	ADNode.copy - creates new ADNode with the same parameters as the original one
 	ADTree.root_always_achievable - checks whether it is always (i.e., under any behaviour of the defender) possible for the attacker to achieve the root goal
 	default_domains.maxProb - domain for computing maximal probability of success over minimal attacks
