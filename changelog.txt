@@ -1,4 +1,6 @@
-version 0.0.5
+-=-=- version 0.0.5 -=-=-
+April 6, 2019
+
 new content:
 	GUI!!! - from adtrees import osead, then run osead() to see it!
 	ADNode.copy - creates new ADNode with the same parameters as the original one
@@ -8,12 +10,17 @@ new content:
 	optimizers.py - adds two functions: optimal_attacks, and optimal_countermeasures
 	ParetoDomain - extended to accommodate the maxProb attribute domain
 	BasicAssignment - when creating from a .txt file, ignore lines starting with '#' (i.e., comments can be added to those files)
+	
 fixes:
 	BasicAssignment - int -> float
 
-version 0.0.4
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+-=-=- version 0.0.4 -=-=-
+
 new content:
 	ADTree.defense_semantics can now be applied to ADTrees containing repeated basic actions
+	
 bugs fixed:
 	ADTree.output
 	ADTree.contains_clones
