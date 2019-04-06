@@ -55,7 +55,7 @@ from adtrees import osead
 osead()
 ```
 
-*OSEAD* stands for "Optimal Strategies Extractor for Attack-Defense trees". To use it under Windows, you don't even need the package: just download the *OSEAD* tool from [here](https://people.irisa.fr/Wojciech.Widel/suftware/osead.zip.).
+*OSEAD* stands for "Optimal Strategies Extractor for Attack-Defense trees". To use it under Windows, you don't even need the package: just download the *OSEAD* tool from [here](https://people.irisa.fr/Wojciech.Widel/suftware/osead.zip).
 
 
 
