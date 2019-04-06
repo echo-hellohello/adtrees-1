@@ -6,7 +6,7 @@ from adtrees.attribute_domain import AttrDomain
 from adtrees.basic_assignment import BasicAssignment
 from adtrees.pareto_domain import ParetoDomain
 from adtrees.osead import osead
-from optimizers import optimal_attacks, optimal_countermeasures
+from adtrees.optimizers import optimal_attacks, optimal_countermeasures
 try:
     from adtrees.linear_programming import ADTilp
 except:
