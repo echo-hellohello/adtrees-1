@@ -47,7 +47,7 @@ For other functionalities and more details, refer to the walk-through examples i
 
 **Easy usage: GUI is here!**
 
-If you want to only analyze your attack or attack-defense tree using methods offered by the package, you can do it conveniently via a GUI. Simply type
+If you want to only analyze your attack or attack-defense tree with the methods offered by the package, you can do it conveniently using a graphical user interface. Simply type
 
 ```python
 from adtrees import osead
