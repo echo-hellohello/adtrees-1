@@ -1,4 +1,5 @@
-- update readme
 - write tests for the new stuff from version 0.0.5
 - create (minimal) documentation for the new stuff from version 0.0.5
 - finish ADTree.dagify, then modify bottom-up to exploit DAG structure
+- learn itertools
+- modify 'optimal_countermeasures'
