@@ -150,10 +150,10 @@ def optimal_countermeasures(T, ba, budget, problem="coverage", defsem=None, outp
                         min_invest_unprev)
                     display_def_actions = False
                 else:
-                    result += "Under the given budget, the minimal investment of the attacker into achieving the root goal is {}.\n\n".format(
+                    result += "Under the given budget, the minimal investment of the attacker into achieving the root goal is not less than {}.\n\n".format(
                         min_invest)
             else:
-                result += "Under the given budget, the minimal investment of the attacker into achieving the root goal is {}.\n\n".format(
+                result += "Under the given budget, the minimal investment of the attacker into achieving the root goal is not less than {}.\n\n".format(
                     min_invest)
             #
         #

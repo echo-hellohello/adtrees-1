@@ -421,6 +421,8 @@ class ADTree:
             for b in defenders_actions:
                 ba[b] = [[b]]
             witnesses = suffWit.evaluateBU(self, ba)
+            # don't forget the empty defense strategy
+            witnesses.append([])
             # substep 2: iterate over witnesses, get attack strategies
             # countering them
             AS = []

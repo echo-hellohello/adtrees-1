@@ -12,4 +12,4 @@ try:
 except:
     print(Warning("Failed to import ADTilp. You won't be able to perform optimization based on integer linear programming, but all the remaining functionalities will work."))
 
-__version__ = '0.0.5'
+__version__ = '0.0.6'

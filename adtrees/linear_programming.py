@@ -28,7 +28,7 @@ class ADTilp():
 
     def __init__(self, T, costassignment, budget, problem='coverage', defsem=None):
         """
-        Given an attack-defense tree T with no repeated basic actions,
+        Given an attack-defense tree T,
         the assignment of cost to the basic actions of the actors
         and the budget of the defender, formulate a linear programming problem.
 
